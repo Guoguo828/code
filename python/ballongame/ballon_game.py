@@ -44,13 +44,16 @@ def clear_message():
 def draw():
     global score, max_score, game_over, time_left, show_message, num1
     clear()
+    square(-210, -200, 410, "black")
+    square(-200, -190, 390, "white")
     if show_message:
         penup()
-        goto(0, 180)  # 定位到游戏框框最上端
+        goto(0, 170)  # 定位到游戏框框最上端 
         pendown()
+        color(d)
         write(f"Good! {num1} ballons", align="center", font=("Arial", 20, "normal"))
     penup()
-    goto(-200, 140)  # 定位到左上角
+    goto(-195, 130)  # 定位到左上角
     pendown()
     color("black")  # 设置字体颜色为黑色
 
