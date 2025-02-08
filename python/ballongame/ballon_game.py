@@ -12,13 +12,14 @@ max_score = 0
 game_over = False
 d = choice(color_option)
 time_left = 60  # 倒计时60秒
+show_message = False  # 控制是否显示消息
 
 ##########定义函数##########
 def distance(a, b, x, y):
     return ((a - x) ** 2 + (b - y) ** 2) ** 0.5
 
 def tap(x, y):
-    global score, game_over
+    global score, game_over, show_message
     num1 = 0
     to_remove = []
     for n in range(len(ballons)):
@@ -32,20 +33,25 @@ def tap(x, y):
     for n in sorted(to_remove, reverse=True):
         ballons.pop(n)
     if num1 > 1:
+        show_message = True
         write(f"Good! {num1} ballons", align="center", font=("Arial", 20, "normal"))
-        ontimer(clear_message, 1000)  # 1秒后清除消息
+        ontimer(clear_message, 3000)  # 3秒后清除消息
 
 def clear_message():
+    global show_message
+    show_message = False
     clear()
     draw()
 
 def draw():
-    global score, max_score, game_over, time_left
+    global score, max_score, game_over, time_left, show_message,num1
     clear()
     penup()
     goto(-200, 140)  # 定位到左上角
     pendown()
     color("black")  # 设置字体颜色为黑色
+    if show_message:
+        write(f"Good! {num1} ballons", align="center", font=("Arial", 20, "normal"))
     if score > max_score:
         max_score = score
     write(f"score={score}\nmax_score={max_score}\ntime_left={time_left}", align="left", font=("Arial", 15, "normal"))
