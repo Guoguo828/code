@@ -19,13 +19,14 @@ def download_all_htmls():
         url=f"https://movie.douban.com/top250?start={idx}&filter="
         print("crawling html:",url)
         r=requests.get(url,headers=headers)
+        r.encoding="utf-8"
         if r.status_code !=200:
             print(r.status_code)
             break
         htmls.append(r.text)
     return htmls
 def parse_single_html(html):
-    soup=BeautifulSoup(html,"html.parser")
+    soup=BeautifulSoup(html,"html.parser",from_encoding="utf-8")
     article_items=(
         soup.find("div",class_="article")
         .find("ol",class_="grid_view")
@@ -51,6 +52,7 @@ def parse_single_html(html):
 
 htmls=download_all_htmls()
 all_datas=[]
+print(htmls)
 for html in htmls:
     all_datas.extend(parse_single_html(html))
 df = pd.DataFrame(all_datas)

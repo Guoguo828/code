@@ -21,7 +21,7 @@ def craw_table(year,month):
     df=pd.read_html(data)[0]
     return df
 df_list = []
-for year in range(2014,2024):
+for year in range(2014,2015):
     for month in range(1,13):
         print("爬去：",year,month)
         df=craw_table(year,month)
