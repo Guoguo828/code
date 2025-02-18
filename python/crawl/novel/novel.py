@@ -16,6 +16,7 @@ def get_novel_chapters():
      return data
 def get_chapter_content(url):
       r=requests.get(url)
+      
       r.encoding="utf-8"
       soup=BeautifulSoup(r.text,"html.parser")
       content=soup.find("div",id="chaptercontent").get_text()
